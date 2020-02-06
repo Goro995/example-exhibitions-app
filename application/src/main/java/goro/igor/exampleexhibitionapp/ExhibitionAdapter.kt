@@ -9,6 +9,8 @@ import goro.igor.model.Exhibit
 import kotlinx.android.synthetic.main.exhibits_list_item.view.*
 
 class ExhibitionAdapter : RecyclerView.Adapter<ExhibitionAdapter.ItemsHolder>() {
+
+    // Why did you use 'var' instead of 'val'?
     private var exhibits: List<Exhibit> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemsHolder {
@@ -36,11 +38,13 @@ class ExhibitionAdapter : RecyclerView.Adapter<ExhibitionAdapter.ItemsHolder>() 
         }
     }
 
+    // What happen if your list (exhibits) will be modified without calling any notify-method?
     fun setExhibits(exhibits: List<Exhibit>) {
         this.exhibits = exhibits
         notifyDataSetChanged()
     }
 
+    // can this class be not inner?
     inner class ItemsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var horizontalRecycler: RecyclerView = itemView.horizontalScroll
     }

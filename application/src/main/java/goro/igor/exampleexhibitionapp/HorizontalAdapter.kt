@@ -11,6 +11,8 @@ import goro.igor.model.Exhibit
 import kotlinx.android.synthetic.main.exhibit_image_list_item.view.*
 
 class HorizontalAdapter : RecyclerView.Adapter<HorizontalAdapter.ItemsHolder>() {
+    // why did you use the modifier "lateinit" instead of passing data object via constructor?
+    // You don't have any protection from the invocation of any notify-method which become a case of app-crash
     private lateinit var exhibit: Exhibit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemsHolder {
@@ -20,7 +22,7 @@ class HorizontalAdapter : RecyclerView.Adapter<HorizontalAdapter.ItemsHolder>() 
     }
 
     override fun onBindViewHolder(holder: ItemsHolder, position: Int) {
-        holder.apply {
+        holder.apply { // why did you use "apply" instead of "also", "let" or "run"?
             titleText.text = exhibit.title
 
             Picasso.get()
@@ -41,6 +43,7 @@ class HorizontalAdapter : RecyclerView.Adapter<HorizontalAdapter.ItemsHolder>() 
         notifyDataSetChanged()
     }
 
+    // Can it be a nested class?
     inner class ItemsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var titleText: TextView = itemView.titleText
         var imageView: ImageView = itemView.imageView
